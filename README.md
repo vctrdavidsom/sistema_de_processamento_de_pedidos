@@ -1,5 +1,5 @@
 
-# Sistema de Processamento de Pedidos - Açougue
+# Sistema de Processamento de Pedidos
 
 Este sistema visa **automatizar o processamento de pedidos** recebidos via WhatsApp, eliminando a necessidade de anotações manuais e tornando o processo mais ágil e preciso.
 
