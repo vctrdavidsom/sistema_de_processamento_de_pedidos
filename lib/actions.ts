@@ -37,7 +37,7 @@ export async function processOrder(message: string): Promise<ProcessedOrder> {
           content: `
             Analise a seguinte mensagem de WhatsApp que contém um pedido e extraia as seguintes informações:
             1. Nome do cliente
-            2. Itens pedidos (nome, quantidade)
+            2. Itens pedidos (nome, quantidade, unidade de medida, como "Kg", "peça", "unidade", "grama", etc.) 
             3. Endereço de entrega (se fornecido)
             4. Observações adicionais (se houver)
 
@@ -45,7 +45,7 @@ export async function processOrder(message: string): Promise<ProcessedOrder> {
             {
               "customerName": "Nome do cliente",
               "items": [
-                { "name": "Nome do item", "quantity": 2 }
+                { "name": "Nome do item", "quantity": 1, "medida": "Kg" }
               ],
               "address": "Endereço completo ou null se não fornecido",
               "notes": "Observações adicionais ou null se não houver"
@@ -69,6 +69,7 @@ export async function processOrder(message: string): Promise<ProcessedOrder> {
     const processedItems = extractedData.items.map((item: any) => ({
       name: item.name,
       quantity: item.quantity,
+      medida: item.medida, // Inclua a unidade de medida
       price: 0, // Preço padrão, será editado pelo usuário
     }))
 
