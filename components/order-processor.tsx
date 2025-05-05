@@ -64,7 +64,6 @@ export default function OrderProcessor() {
         name: line,
         quantity: 1,
         price: 0,
-        medida: "unidade", // Adicione um valor padrão para 'medida'
       })),
     }
 
@@ -87,18 +86,12 @@ export default function OrderProcessor() {
       const result = await processOrder(message)
 
       // Simplify the order by removing price and quantity information
-      const simplifiedOrder: ProcessedOrder = {
-        id: result.id || "default-id", // Provide a default or use result.id
-        customerName: result.customerName || "Cliente Desconhecido", // Provide a default or use result.customerName
-        timestamp: typeof result.timestamp === "number" ? result.timestamp : Date.now(), // Ensure timestamp is a number
-        originalMessage: result.originalMessage || message, // Use the original message or a default
-        status: result.status || "pending", // Provide a default or use result.status
+      const simplifiedOrder = {
+        ...result,
         items: result.items.map((item) => ({
           ...item,
-          name: item.quantity > 1 ? `${item.quantity} ${item.medida} ${item.name}` : item.name,
-          quantity: 1,
-          price: 0,
-          medida: item.medida || "unidade", // Certifique-se de incluir 'medida'
+          name: item.quantity > 1 ? `${item.quantity} ${item.medida} ${item.name}` : `1 ${item.medida} ${item.name}`,
+          
         })),
         total: 0,
       }

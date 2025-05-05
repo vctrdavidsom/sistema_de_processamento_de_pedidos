@@ -2,25 +2,20 @@ export interface OrderItem {
   name: string
   quantity: number
   price: number
+  medida: string // Adicionando a propriedade medida
 }
 
-export type ProcessedOrderItem = {
-  name: string
-  quantity: number
-  price: number
-  medida: string // Adicione esta propriedade
-}
-
-export type ProcessedOrder = {
+export interface ProcessedOrder {
   id: string
   customerName: string
-  items: ProcessedOrderItem[]
+  items: OrderItem[]
   total: number
   address?: string
   notes?: string
   timestamp: number
   originalMessage: string
-  status: OrderStatus
+  status?: OrderStatus
+  isSaved?: boolean
 }
 
 export type OrderStatus = "pending" | "completed" | "cancelled"
