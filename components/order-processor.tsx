@@ -61,9 +61,10 @@ export default function OrderProcessor() {
       address,
       notes,
       items: itemsText.split("\n").map((line) => ({
-        name: line,
-        quantity: 1,
-        price: 0,
+          name: line,
+          quantity: 1,
+          price: 0,
+          medida: "unidade", // Default value for 'medida'
       })),
     }
 
